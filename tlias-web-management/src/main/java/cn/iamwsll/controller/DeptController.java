@@ -19,7 +19,7 @@ public class DeptController {
     /**
      * 查询所有部门
      */
-    @GetMapping("/depts")  //等同于上面
+    @GetMapping("/depts")
     public Result list() {
         System.out.println("查询全部部门数据");
         List<Dept> deptList =  deptService.findAll();
