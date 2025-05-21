@@ -15,4 +15,17 @@ public interface DeptMapper {
      */
     @Select("select id,name,create_time,update_time from dept order by update_time desc")
     List<Dept> findAll();
+
+    /**
+     * 删除某个id的部门
+     * 我们忽略了返回值.
+     */
+    @Select("delete from dept where id = #{id}")
+    void deleteById(Integer id);
+
+    /**
+     * 新增部门
+     */
+    @Select("insert into dept(name,create_time,update_time) values(#{name},#{createTime},#{updateTime})")
+    void insert(Dept dept);
 }
