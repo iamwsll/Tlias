@@ -19,4 +19,14 @@ public interface DeptService {
      * 新增
      */
     void add(Dept dept);
+
+    /**
+     * 根据id查询部门
+     */
+    Dept getById(Integer id);
+
+    /**
+     * 更新部门
+     */
+    void update(Dept dept);
 }

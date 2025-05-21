@@ -33,4 +33,16 @@ public class DeptServiceImpl implements DeptService {
         //调用mapper
         deptMapper.insert(dept);
     }
+
+    @Override
+    public Dept getById(Integer id) {
+        return deptMapper.getById(id);
+    }
+    @Override
+    public void update(Dept dept) {
+        //补全基础属性
+        dept.setUpdateTime(LocalDateTime.now());
+        //调用mapper
+        deptMapper.update(dept);
+    }
 }
