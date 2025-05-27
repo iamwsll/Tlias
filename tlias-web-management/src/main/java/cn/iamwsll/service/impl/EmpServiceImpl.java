@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,9 +26,9 @@ public class EmpServiceImpl implements EmpService {
 //      return new PageResult<Emp>(total, rows); // 创建分页结果对象
 //    }
     @Override
-    public PageResult<Emp> page(Integer page, Integer pageSize) {
+    public PageResult<Emp> page(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
         PageHelper.startPage(page, pageSize); // 使用PageHelper进行分页
-        List<Emp> empList = empMapper.list();// 调用Mapper方法查询所有员工数据
+        List<Emp> empList = empMapper.list(name,gender,begin,end);// 调用Mapper方法查询所有员工数据
         Page<Emp> p = (Page<Emp>) empList; // 将查询结果转换为Page对象 Page这个类是ArrayList的子类
         return new PageResult<>(p.getTotal(), p.getResult()); // 返回分页结果
     }
