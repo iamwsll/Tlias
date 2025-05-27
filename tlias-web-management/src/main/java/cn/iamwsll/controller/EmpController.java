@@ -1,6 +1,7 @@
 package cn.iamwsll.controller;
 
 import cn.iamwsll.pojo.Emp;
+import cn.iamwsll.pojo.EmpQueryParam;
 import cn.iamwsll.pojo.PageResult;
 import cn.iamwsll.pojo.Result;
 import cn.iamwsll.service.EmpService;
@@ -34,14 +35,9 @@ public class EmpController {
      * @return 分页结果
      */
     @GetMapping
-    public Result page(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize,
-                       String name , Integer gender,
-                       @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
-                       @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
-        log.info("分页查询员工数据,page:{},pageSize:{},name:{},gender:{},begin:{},end:{}",
-                page, pageSize, name,gender, begin, end);
-        PageResult<Emp> pageResult =  empService.page(page, pageSize,name,gender,begin,end);
+    public Result page(EmpQueryParam empQueryParam) {
+        log.info("分页查询员工数据,参数:{}", empQueryParam);
+        PageResult<Emp> pageResult =  empService.page(empQueryParam);
         return Result.success(pageResult);
     }
 

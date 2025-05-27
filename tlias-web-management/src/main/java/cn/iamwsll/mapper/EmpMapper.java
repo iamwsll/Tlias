@@ -1,6 +1,7 @@
 package cn.iamwsll.mapper;
 
 import cn.iamwsll.pojo.Emp;
+import cn.iamwsll.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -32,5 +33,5 @@ public interface EmpMapper {
 //    public List<Emp> list(Integer start,Integer pageSize);
 
 
-    public List<Emp> list(String name, Integer gender, LocalDate begin, LocalDate end);
+    public List<Emp> list(EmpQueryParam empQueryParam); // 分页查询员工数据，使用EmpQueryParam作为查询参数对象
 }
