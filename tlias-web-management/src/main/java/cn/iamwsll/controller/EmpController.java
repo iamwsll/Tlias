@@ -9,10 +9,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.regex.Pattern;
@@ -30,8 +27,7 @@ public class EmpController {
 
     /**
      * 分页查询员工数据
-     * @param page 页码
-     * @param pageSize 每页显示的行数
+     * @param empQueryParam 分页查询参数
      * @return 分页结果
      */
     @GetMapping
@@ -39,6 +35,13 @@ public class EmpController {
         log.info("分页查询员工数据,参数:{}", empQueryParam);
         PageResult<Emp> pageResult =  empService.page(empQueryParam);
         return Result.success(pageResult);
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Emp emp) {
+        log.info("新增员工:{}", emp);
+        empService.save(emp);
+        return Result.success();
     }
 
 }

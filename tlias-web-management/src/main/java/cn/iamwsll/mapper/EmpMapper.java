@@ -2,8 +2,11 @@ package cn.iamwsll.mapper;
 
 import cn.iamwsll.pojo.Emp;
 import cn.iamwsll.pojo.EmpQueryParam;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,4 +37,14 @@ public interface EmpMapper {
 
 
     public List<Emp> list(EmpQueryParam empQueryParam); // 分页查询员工数据，使用EmpQueryParam作为查询参数对象
+
+
+    /**
+     * 插入员工数据
+     * @param emp 员工对象
+     */
+    @Options(useGeneratedKeys = true, keyProperty = "id") // 主键返回:mybatis提供的,会把插入到数据库后的主键重新赋值给emp
+    @Insert("insert into emp(username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time)" +
+            " values(#{username},#{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})")
+    void insert(Emp emp);
 }

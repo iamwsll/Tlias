@@ -8,6 +8,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1234
+  servlet:
+    multipart:
+      # 单个文件上传的最大大小
+      max-file-size: 10MB
+      # 一个请求的最大大小(包括所有文件和表单数据)(因为是可以上传多个文件的)
+      max-request-size: 100MB
 
 #Mybatis的相关配置
 mybatis:
@@ -16,3 +22,9 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 是否开启驼峰命名转换
     map-underscore-to-camel-case: true
+
+# 设置事务的日志级别为debug
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
+
