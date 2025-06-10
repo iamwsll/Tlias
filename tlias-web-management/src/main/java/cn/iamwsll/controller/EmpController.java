@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /*
@@ -44,4 +45,10 @@ public class EmpController {
         return Result.success();
     }
 
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids) {
+        log.info("删除员工数据,ids:{}", ids);
+        empService.delete(ids);
+        return Result.success();
+    }
 }

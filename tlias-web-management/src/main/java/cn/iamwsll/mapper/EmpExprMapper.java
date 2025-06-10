@@ -12,4 +12,10 @@ import java.util.List;
 @Mapper
 public interface EmpExprMapper {
     void insertBatch(List<EmpExpr> exprList);
+
+    /**
+     * 根据员工ID查询工作经历
+     * @param empIds 员工ID
+     */
+    void deleteByEmpIds(List<Integer> empIds);
 }

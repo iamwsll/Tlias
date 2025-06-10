@@ -5,6 +5,7 @@ import cn.iamwsll.pojo.EmpQueryParam;
 import cn.iamwsll.pojo.PageResult;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface EmpService {
     /**
@@ -18,4 +19,6 @@ public interface EmpService {
         * 保存员工信息
      */
     void save(Emp emp);
+
+    void delete(List<Integer> ids);
 }
