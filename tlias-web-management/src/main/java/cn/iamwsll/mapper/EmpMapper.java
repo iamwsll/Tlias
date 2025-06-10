@@ -60,4 +60,10 @@ public interface EmpMapper {
      * @return 员工对象
      */
     Emp getById(Integer id);
+
+    /**
+     * 更新员工信息
+     * @param emp 员工对象
+     */
+    void updateById(Emp emp);
 }

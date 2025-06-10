@@ -15,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -78,6 +79,26 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public Emp getInfo(Integer id) {
         return empMapper.getById(id); // 根据ID查询员工信息
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void update(Emp emp) {
+        //1. 根据id修改员工的基本信息
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateById(emp); // 调用Mapper方法更新员工基本信息
+        //2. 根据id修改员工的工作经历信息
+        //2.1 删除员工的工作信息
+        empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
+        //2.2 插入新的工作经历信息
+        List<EmpExpr> exprList = emp.getExprList();
+        if (!CollectionUtils.isEmpty(exprList)) {
+            // 补全员工表达式的基础属性
+            exprList.forEach(empExpr -> {
+                empExpr.setEmpId(emp.getId());
+            });
+            empExprMapper.insertBatch(exprList); // 批量插入员工表达式数据
+        }
     }
 
 
