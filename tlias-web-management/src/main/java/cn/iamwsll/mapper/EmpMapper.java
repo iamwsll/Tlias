@@ -2,14 +2,12 @@ package cn.iamwsll.mapper;
 
 import cn.iamwsll.pojo.Emp;
 import cn.iamwsll.pojo.EmpQueryParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.boot.autoconfigure.batch.BatchProperties;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 /*
  * 员工Mapper接口
@@ -66,4 +64,10 @@ public interface EmpMapper {
      * @param emp 员工对象
      */
     void updateById(Emp emp);
+
+    /**
+     * 统计每个部门的员工数量
+     */
+    @MapKey("pos")
+    List<Map<String, Object>> countEmpJobData();
 }
