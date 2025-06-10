@@ -53,4 +53,11 @@ public interface EmpMapper {
      * @param ids 员工ID列表
      */
     void deleteByIds(List<Integer> ids);
+
+    /**
+     * 根据ID查询员工信息
+     * @param id 员工ID
+     * @return 员工对象
+     */
+    Emp getById(Integer id);
 }
